@@ -1,1 +1,1 @@
-console.log("rawr")
+// I really missed coding. I was scared to try it again because it'd been so long, but despite everything, I always end up coming back to it because I love the way it scratches my brain. I couldn't get any sleep, so I figured what better way to pass the time than to give this a go again? I doubt this will be seen but if so, Hello! It's good to be back. I'll be pretty busy this month, but I genuinely do want to try to get back into the rhythm of coding... It's a beautiful night to be alive.
