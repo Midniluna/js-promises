@@ -1,0 +1,20 @@
+body {
+    background-color: rgb(40, 151, 40);
+}
+
+.deck {
+    margin-top: 5%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.get_card {
+    padding: 10px;
+    font-size: 20px;
+}
+
+.card_img {
+    position: absolute;
+    margin-top: 7em;
+}
