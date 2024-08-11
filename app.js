@@ -59,44 +59,42 @@ function get_random (list) {
 function getPokemon() {
     return new Promise(() => {
         let $pkmnList = $(".pokemon_list")
-        // if there's info already in there, remove it
         $pkmnList.empty();
 
+        // Make get request to pull all pokemon from database
         axios.get(`${BASE_URL}pokemon?limit=100000&offset=0`)
         .then(result => {
             // randomly select 3 pokemon from full database
             for (let i = 0; i < 3 ; i++) {
                 let chosenMon = get_random(result.data.results)
+                let pkmnName
+                let engFlavText 
 
                 axios.get(chosenMon.url)
                 .then(result => {
-                    // Get name and species url for chosen pokemon
-                    let pkmnName = result.data.name
-                    let speciesUrl = result.data.species.url
-
-                    // make request to species url to get pokedex data for chosen pokemon
-                    axios.get(speciesUrl)
-                    .then(speciesInfo => {
-                        // Find an English entry and append it to the list with the name
-                        let engFlavText 
-                        let allEntries = speciesInfo.data.flavor_text_entries
-
-                        for (let entry of allEntries) {
-                            if (entry.language.name == 'en') {
-                                engFlavText = entry.flavor_text;
-                                break;
-                            }
-                            else {
-                                continue;
-                            }
-
-                        }
-
-                        // console.log(`${pkmnName}: ${engFlavText}`)
-                        $pkmnList.append(`<li><b>${pkmnName}:</b> ${engFlavText}</li>`)
-
-                    })
+                    // Set name value for chosen pokemon and make a new request with that pokemon's species url to get the pokedex entry
+                    pkmnName = result.data.name;
+                    return axios.get(result.data.species.url); 
                 })
+                .then(speciesInfo => {
+                // Find an English pokedex entry for that species and save its value
+                    let allEntries = speciesInfo.data.flavor_text_entries
+
+                    // ----- LOOP ----
+                    for (let entry of allEntries) {
+                        if (entry.language.name == 'en') {
+                            engFlavText = entry.flavor_text;
+                            break;
+                        }
+                        else {
+                            continue;
+                        }
+                    }
+                    // ----- LOOP ----
+                })
+                
+                // append pkmn data onto list (name and pokedex entry)
+                $pkmnList.append(`<li><b>${pkmnName}:</b> ${engFlavText}</li>`)
             }
         })
         .catch(err => console.log(err))
