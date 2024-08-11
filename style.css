@@ -1,4 +1,4 @@
-body {
+/* body {
     background-color: rgb(40, 151, 40);
 }
 
@@ -17,4 +17,25 @@ body {
 .card_img {
     position: absolute;
     margin-top: 7em;
+} */
+
+body {
+    background-color: rgb(253, 253, 177);
+}
+
+.get_pokemon {
+    margin: 0 auto;
+    margin-top: 3em;
+    display: block;
+    padding: 10px;
+    font-size: 18px;
+    cursor:pointer;
+}
+
+ul {
+    margin: 0 auto;
+    margin-top: 3em;
+    display: block;
+    width:30%;
+    font-size: 22px;
 }
